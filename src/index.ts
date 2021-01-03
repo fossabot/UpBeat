@@ -3,7 +3,7 @@ config();
 import { readdirSync } from "fs";
 import { join } from "path";
 import { UpBeatClient } from "./struct/Client";
-import { ActivityType } from "discord.js";
+import { ActivityType, Message } from "discord.js";
 const client:UpBeatClient = new UpBeatClient({
     token: process.env.DISCORD_CLIENT_TOKEN!,
     prefix: process.env.DISCORD_CLIENT_PREFIX!,
@@ -34,6 +34,24 @@ client.once("ready", () => {
    catch (err) {
        console.error(err);
    }
+});
+
+// Message Event
+client.on("message", (message:Message) => {
+    if (!message.content.startsWith(client.config.prefix) || message.author.bot) return;
+    const args = message.content.slice(client.config.prefix.length).split(/ +/);
+    const commandName = args.shift()?.toLowerCase();
+    const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases && cmd.aliases.includes(commandName));
+    if (!command) return;
+    if (message.channel.type !== "text") return;
+
+    try {
+        command.execute(client, message, args);
+    }
+    catch (err) {
+        console.error(`Could not load ${commandName} command: ${err}`);
+        process.exit(1);
+    }
 });
 
 // Client Login
