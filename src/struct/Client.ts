@@ -6,6 +6,7 @@ type UpBeatConfig = {
 };
 
 export class UpBeatClient extends Client {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     commands = new Collection<any, any>();
     config: UpBeatConfig;
 
