@@ -15,9 +15,9 @@ client.once("ready", () => {
        void client.user?.setPresence({
            status: "dnd",
            activity: {
-               name: process.env.DISCORD_PRESENCE_MESSAGE,
+               name: process.env.DISCORD_CLIENT_PRESENCE_MESSAGE,
                // To read from env, we have to type case here
-               type: process.env.DISCORD_PRESENCE_TYPE as ActivityType,
+               type: process.env.DISCORD_CLIENT_PRESENCE_TYPE as ActivityType,
            },
        });
    }
