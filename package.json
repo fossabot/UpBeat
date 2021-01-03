@@ -1,0 +1,25 @@
+{
+  "name": "@upbeat/upbeat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tommyshelby9121/UpBeat.git"
+  },
+  "keywords": [
+    "typescript",
+    "nodejs",
+    "discordjs",
+    "musicbot"
+  ],
+  "author": "Sycrixx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tommyshelby9121/UpBeat/issues"
+  },
+  "homepage": "https://github.com/tommyshelby9121/UpBeat#readme"
+}
