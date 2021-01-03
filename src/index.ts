@@ -1,11 +1,21 @@
 import { config } from "dotenv";
 config();
+import { readdirSync } from "fs";
+import { join } from "path";
 import { UpBeatClient } from "./struct/Client";
 import { ActivityType } from "discord.js";
 const client:UpBeatClient = new UpBeatClient({
     token: process.env.DISCORD_CLIENT_TOKEN!,
     prefix: process.env.DISCORD_CLIENT_PREFIX!,
 });
+
+// Command Handler
+const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.default.name, command.default);
+    console.log(`${file} loaded`);
+}
 
 // Ready Event
 client.once("ready", () => {
