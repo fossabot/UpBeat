@@ -5,6 +5,7 @@ import { join } from "path";
 import { UpBeatClient } from "./struct/Client";
 import { ActivityType, Message } from "discord.js";
 const client:UpBeatClient = new UpBeatClient({
+    /* eslint-disable @typescript-eslint/no-non-null-assertion */
     token: process.env.DISCORD_CLIENT_TOKEN!,
     prefix: process.env.DISCORD_CLIENT_PREFIX!,
 });
@@ -12,6 +13,7 @@ const client:UpBeatClient = new UpBeatClient({
 // Command Handler
 const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
 for (const file of commandFiles) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const command = require(`./commands/${file}`);
     client.commands.set(command.default.name, command.default);
     console.log(`${file} loaded`);
